@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Функция: Заказ корма и товаров · TomaCare Discovery</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px; line-height: 1.65; color: #1a1a1a;
+    background: #fafafa; padding: 0;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; background: #fff; }
+h1 { font-size: 1.9em; font-weight: 700; margin-bottom: 6px; color: #111; }
+h2 { font-size: 1.25em; font-weight: 700; margin: 36px 0 10px; color: #1a1a1a;
+     padding-bottom: 5px; border-bottom: 2px solid #e8e8e8; }
+h3 { font-size: 1.05em; font-weight: 600; margin: 20px 0 6px; color: #222; }
+p  { margin: 6px 0 8px; }
+ul { margin: 4px 0 8px 20px; }
+li { margin: 3px 0; }
+ol { margin: 4px 0 8px 22px; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+hr { border: none; border-top: 1px solid #ddd; margin: 28px 0; }
+.meta { color: #666; font-size: 0.88em; margin-bottom: 28px; line-height: 1.8; }
+.meta span { margin-right: 20px; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.92em; }
+th { background: #f2f2f2; font-weight: 600; text-align: left;
+     padding: 8px 10px; border: 1px solid #ddd; }
+td { padding: 7px 10px; border: 1px solid #ddd; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+blockquote { border-left: 3px solid #ddd; margin: 8px 0; padding: 4px 12px; color: #444; }
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.back { font-size: 0.88em; margin-bottom: 28px; display: inline-block; }
+.stat-bar { display: flex; gap: 24px; margin: 16px 0 32px; }
+.stat-item { text-align: center; }
+.stat-pct { font-size: 1.8em; font-weight: 700; line-height: 1; }
+.stat-label { font-size: 0.8em; color: #666; margin-top: 3px; }
+.feature-table th { background: #111; color: #fff; }
+.feature-table td { padding: 10px 12px; }
+.feature-table tr:hover td { background: #f0f5ff; }
+.prob { font-weight: 600; white-space: nowrap; }
+.prob-high { color: #d93025; }
+.prob-mid  { color: #e8a020; }
+.prob-low  { color: #2e7d32; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="index.html">← К списку интервью</a>
+<h1>Функция #10: Заказ корма и товаров</h1>
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-pct" style="color:#d93025">67%</div>
+    <div class="stat-label">Высокая</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-pct" style="color:#e8a020">17%</div>
+    <div class="stat-label">Средняя</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-pct" style="color:#2e7d32">17%</div>
+    <div class="stat-label">Низкая</div>
+  </div>
+</div>
+<table class="feature-table">
+  <thead>
+    <tr>
+      <th>Владелец</th>
+      <th>Город</th>
+      <th>Вероятность</th>
+      <th>Обоснование</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Юлия К.</strong><br><span style="color:#666;font-size:0.9em">Бурбон · фр. бульдог · СПб</span></td>
+      <td>Санкт-Петербург</td>
+      <td><span class="prob prob-low">● Низкая</span></td>
+      <td>Покупает на Ozon, система работает, жалоб нет.</td>
+    </tr>
+    <tr>
+      <td><strong>Андрей</strong><br><span style="color:#666;font-size:0.9em">Персик · фр. бульдог · Ереван</span></td>
+      <td>Ереван</td>
+      <td><span class="prob prob-high">● Высокая</span></td>
+      <td>Brit — один из немногих кормов в Армении. Реальный эпизод тревоги — корм начал заканчиваться, насыпью не оказалось. «Осознал уязвимость: если корм пропадёт — альтернатив мало».</td>
+    </tr>
+    <tr>
+      <td><strong>Мария</strong><br><span style="color:#666;font-size:0.9em">Булочка · беспородная · Ереван</span></td>
+      <td>Ереван</td>
+      <td><span class="prob prob-high">● Высокая</span></td>
+      <td>Заказывает через Яндекс из единственного магазина с нужным кормом. Ограниченный выбор в Армении.</td>
+    </tr>
+    <tr>
+      <td><strong>Велиса</strong><br><span style="color:#666;font-size:0.9em">Юни · кавалер · Ереван</span></td>
+      <td>Ереван</td>
+      <td><span class="prob prob-mid">● Средняя</span></td>
+      <td>Нужный вкус Acana не везде, ближайший магазин не всегда по пути.</td>
+    </tr>
+    <tr>
+      <td><strong>Настя</strong><br><span style="color:#666;font-size:0.9em">Сэр Элтен Джон · мальтипу · Ереван</span></td>
+      <td>Ереван</td>
+      <td><span class="prob prob-high">● Высокая</span></td>
+      <td>Alpha-Pet только из России (2 недели ждать); одежду и аксессуары не найти в Ереване; хочет агрегатор по наличию в местных магазинах.</td>
+    </tr>
+    <tr>
+      <td><strong>Искуи</strong><br><span style="color:#666;font-size:0.9em">беспородная · 5 лет · Ереван</span></td>
+      <td>Ереван</td>
+      <td><span class="prob prob-high">● Высокая</span></td>
+      <td>В районе Шенгавит нет зоомагазинов — «онлайн удобнее». Уже покупает онлайн, сама предложила заказ корма как желаемую функцию.</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+</body>
+</html>
