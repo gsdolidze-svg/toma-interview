@@ -515,28 +515,36 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
 </table>
 
 <script>
+function renumberInterviews() {
+  var n = 1;
+  document.querySelectorAll('.index-table tr[data-city]').forEach(function(row) {
+    if (row.style.display !== 'none') {
+      row.querySelector('td:first-child').textContent = n++;
+    }
+  });
+}
+
 function switchCity(city, btn) {
-  // обновляем кнопки
   document.querySelectorAll('.city-tab').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
 
-  // фильтр таблицы интервью
   document.querySelectorAll('.index-table tr[data-city]').forEach(function(row) {
     row.style.display = row.dataset.city === city ? '' : 'none';
   });
 
-  // сводная таблица
   var tbodies = { erevan: document.getElementById('summary-erevan'), spb: document.getElementById('summary-spb') };
   Object.keys(tbodies).forEach(function(k) {
     tbodies[k].style.display = k === city ? '' : 'none';
   });
+
+  renumberInterviews();
 }
 
-// инициализация при загрузке — показываем только Ереван
 (function() {
   document.querySelectorAll('.index-table tr[data-city]').forEach(function(row) {
     if (row.dataset.city !== 'erevan') row.style.display = 'none';
   });
+  renumberInterviews();
 })();
 </script>
 
