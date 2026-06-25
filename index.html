@@ -97,7 +97,7 @@ a:hover { text-decoration: underline; }
 </div>
 <script>
 (function() {
-  if (sessionStorage.getItem('tc_auth') === '1') {
+  if (location.protocol === 'file:' || sessionStorage.getItem('tc_auth') === '1') {
     document.getElementById('auth-overlay').style.display = 'none';
   }
 })();
