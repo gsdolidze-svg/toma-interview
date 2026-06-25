@@ -74,6 +74,15 @@ a:hover { text-decoration: underline; }
     transition: background 0.15s; white-space: nowrap; }
 .contact-link:hover { background: #e8e8e8; text-decoration: none; }
 .contact-link svg { flex-shrink: 0; }
+
+.city-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.city-tab {
+  padding: 7px 20px; border-radius: 8px; font-size: 0.92em; font-weight: 600;
+  cursor: pointer; border: 2px solid #e0e0e0; background: #fff; color: #666;
+  transition: all 0.15s; font-family: inherit;
+}
+.city-tab.active { border-color: #111; background: #111; color: #fff; }
+.city-tab:hover:not(.active) { border-color: #999; color: #333; }
 </style>
 </head>
 <body>
@@ -116,6 +125,10 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
   <span>Статус: в процессе</span>
 </p>
 <hr>
+<div class="city-tabs">
+  <button class="city-tab active" onclick="switchCity('erevan', this)">🇦🇲 Ереван</button>
+  <button class="city-tab" onclick="switchCity('spb', this)">🇷🇺 Санкт-Петербург</button>
+</div>
 <table class="index-table">
   <thead>
     <tr>
@@ -129,7 +142,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr data-city="spb">
       <td>1</td>
       <td><strong>Бурбон</strong><br>Французский бульдог, 3 года<br>Хроническая проблема с позвоночником, операция в анамнезе</td>
       <td><strong>Юлия К.</strong><br>47 лет, дизайнер, удалёнка</td>
@@ -148,7 +161,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>25 мая 2026</td>
       <td><a href="interview-01-yulia-k.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>2</td>
       <td><strong>Персик</strong><br>Французский бульдог, 5 лет<br>Хроническая проблема с ушами, агрессия к другим собакам</td>
       <td><strong>Андрей</strong><br>43 года, айтишник, удалёнка</td>
@@ -175,7 +188,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>28 мая 2026</td>
       <td><a href="interview-02-персик.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>3</td>
       <td><strong>Булочка</strong><br>Беспородная (приютная), 3,5 года<br>Поведенческая тревожность, боится улицы и незнакомых людей</td>
       <td><strong>Мария</strong><br>31 год, айтишник, удалёнка</td>
@@ -202,7 +215,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>2 июня 2026</td>
       <td><a href="interview-03-мария.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>4</td>
       <td><strong>Юни</strong><br>Кавалер кинг чарлз спаниель, ~1 год<br>Сепарационная тревога, выставочная собака</td>
       <td><strong>Велиса</strong><br>49 лет, преподаватель, Ереван</td>
@@ -229,7 +242,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>17 июня 2026</td>
       <td><a href="interview-04-велиса.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>5</td>
       <td><strong>Сэр Элтен Джон</strong><br>Мальтипу, 5 месяцев</td>
       <td><strong>Настя</strong><br>~35 лет, фотограф, Ереван</td>
@@ -256,7 +269,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>19 июня 2026</td>
       <td><a href="interview-05-настя.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>6</td>
       <td><strong>Нико</strong><br>Беспородная (подобрана с улицы), 5 лет, ~20–30 кг</td>
       <td><strong>Искуи</strong><br>молодая армянка, Ереван (Шенгавит)</td>
@@ -283,7 +296,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>23 июня 2026</td>
       <td><a href="interview-06-искуи.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>7</td>
       <td><strong>Бейли</strong><br>Кокер-спаниель, ~5–6 лет</td>
       <td><strong>Ануш</strong><br>армянка, Ереван</td>
@@ -310,7 +323,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <td>23 июня 2026</td>
       <td><a href="interview-07-ануш.html">Открыть →</a></td>
     </tr>
-    <tr>
+    <tr data-city="erevan">
       <td>8</td>
       <td><strong>Арчи</strong><br>Кокер-спаниель, ~9 лет<br>Привезён из США; возрастные проблемы с глазами, суставами, сердцем</td>
       <td><strong>Диана</strong><br>владелица зоомагазина, Ереван</td>
@@ -339,7 +352,7 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
   <span style="color:#e8a020;font-weight:600">● Средняя</span> — есть процесс, было бы удобнее &nbsp;
   <span style="color:#2e7d32;font-weight:600">● Низкая</span> — маловероятно
 </p>
-<table>
+<table id="summary-table">
   <thead>
     <tr>
       <th>#</th>
@@ -349,81 +362,183 @@ document.getElementById('auth-input').addEventListener('keydown', function(e) {
       <th style="text-align:center;color:#2e7d32">● Низкая</th>
     </tr>
   </thead>
-  <tbody>
+  <!-- Ереван n=7 -->
+  <tbody id="summary-erevan">
     <tr>
       <td>1</td><td><a href="feature-08-ratings.html">Рейтинг / отзывы специалистов</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">63%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">13%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">25%</td>
+      <td style="text-align:center;color:#d93025;font-weight:600">71%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">14%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">14%</td>
     </tr>
     <tr>
-      <td>2</td><td><a href="feature-10-shop.html">Заказ корма и товаров</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">50%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">25%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">25%</td>
+      <td>2</td><td><a href="feature-07-sitter.html">Заказ ситтера</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">57%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">29%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">14%</td>
     </tr>
     <tr>
-      <td>3</td><td><a href="feature-07-sitter.html">Заказ ситтера</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">50%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">25%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">25%</td>
+      <td>3</td><td><a href="feature-10-shop.html">Заказ корма и товаров</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">57%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">29%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">14%</td>
     </tr>
     <tr>
-      <td>4</td><td><a href="feature-01-zapis-vrach.html">Онлайн-запись к врачу</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">38%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">50%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">13%</td>
+      <td>4</td><td><a href="feature-05-support.html">Онлайн-поддержка / консультации</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">43%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">14%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">43%</td>
     </tr>
     <tr>
-      <td>5</td><td><a href="feature-05-support.html">Онлайн-поддержка / консультации</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">38%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">13%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">50%</td>
+      <td>5</td><td><a href="feature-01-zapis-vrach.html">Онлайн-запись к врачу</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">29%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">57%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">14%</td>
     </tr>
     <tr>
-      <td>6</td><td><a href="feature-12-alerts.html">Уведомление о необычном поведении</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">25%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">38%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">38%</td>
+      <td>6</td><td><a href="feature-06-training.html">Онлайн-тренировки / телекинолог</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">29%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">14%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">57%</td>
     </tr>
     <tr>
-      <td>7</td><td><a href="feature-06-training.html">Онлайн-тренировки / телекинолог</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">25%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">13%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">63%</td>
+      <td>7</td><td><a href="feature-03-history.html">История болезни, вакцинации, напоминания</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">29%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">43%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">29%</td>
     </tr>
     <tr>
-      <td>8</td><td><a href="feature-03-history.html">История болезни, вакцинации, напоминания</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">25%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">38%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">38%</td>
+      <td>8</td><td><a href="feature-04-nutrition.html">Контроль питания</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">14%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">43%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">43%</td>
     </tr>
     <tr>
-      <td>9</td><td><a href="feature-04-nutrition.html">Контроль питания</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">13%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">38%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">50%</td>
+      <td>9</td><td><a href="feature-09-camera.html">Видеонаблюдение</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">14%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">43%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">43%</td>
     </tr>
     <tr>
-      <td>10</td><td><a href="feature-09-camera.html">Видеонаблюдение</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">13%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">50%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">38%</td>
+      <td>10</td><td><a href="feature-11-gps.html">GPS-трекер</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">14%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">29%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">57%</td>
     </tr>
     <tr>
-      <td>11</td><td><a href="feature-11-gps.html">GPS-трекер</a></td>
-      <td style="text-align:center;color:#d93025;font-weight:600">13%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">25%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">63%</td>
+      <td>11</td><td><a href="feature-12-alerts.html">Уведомление о необычном поведении</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">14%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">43%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">43%</td>
     </tr>
     <tr>
       <td>12</td><td><a href="feature-02-groming.html">Онлайн-запись на груминг и уход</a></td>
       <td style="text-align:center;color:#999">0%</td>
-      <td style="text-align:center;color:#e8a020;font-weight:600">63%</td>
-      <td style="text-align:center;color:#2e7d32;font-weight:600">38%</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">57%</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">43%</td>
+    </tr>
+  </tbody>
+  <!-- Санкт-Петербург n=1 (Юлия К.) — индивидуальные оценки -->
+  <tbody id="summary-spb" style="display:none">
+    <tr>
+      <td>1</td><td><a href="feature-01-zapis-vrach.html">Онлайн-запись к врачу</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">● Высокая</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+    </tr>
+    <tr>
+      <td>2</td><td><a href="feature-12-alerts.html">Уведомление о необычном поведении</a></td>
+      <td style="text-align:center;color:#d93025;font-weight:600">● Высокая</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+    </tr>
+    <tr>
+      <td>3</td><td><a href="feature-02-groming.html">Онлайн-запись на груминг и уход</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">● Средняя</td>
+      <td style="text-align:center;color:#ccc">—</td>
+    </tr>
+    <tr>
+      <td>4</td><td><a href="feature-09-camera.html">Видеонаблюдение</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#e8a020;font-weight:600">● Средняя</td>
+      <td style="text-align:center;color:#ccc">—</td>
+    </tr>
+    <tr>
+      <td>5</td><td><a href="feature-10-shop.html">Заказ корма и товаров</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>6</td><td><a href="feature-07-sitter.html">Заказ ситтера</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>7</td><td><a href="feature-05-support.html">Онлайн-поддержка / консультации</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>8</td><td><a href="feature-06-training.html">Онлайн-тренировки / телекинолог</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>9</td><td><a href="feature-03-history.html">История болезни, вакцинации, напоминания</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>10</td><td><a href="feature-04-nutrition.html">Контроль питания</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>11</td><td><a href="feature-08-ratings.html">Рейтинг / отзывы специалистов</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
+    </tr>
+    <tr>
+      <td>12</td><td><a href="feature-11-gps.html">GPS-трекер</a></td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#ccc">—</td>
+      <td style="text-align:center;color:#2e7d32;font-weight:600">● Низкая</td>
     </tr>
   </tbody>
 </table>
+
+<script>
+function switchCity(city, btn) {
+  // обновляем кнопки
+  document.querySelectorAll('.city-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  // фильтр таблицы интервью
+  document.querySelectorAll('.index-table tr[data-city]').forEach(function(row) {
+    row.style.display = row.dataset.city === city ? '' : 'none';
+  });
+
+  // сводная таблица
+  var tbodies = { erevan: document.getElementById('summary-erevan'), spb: document.getElementById('summary-spb') };
+  Object.keys(tbodies).forEach(function(k) {
+    tbodies[k].style.display = k === city ? '' : 'none';
+  });
+}
+
+// инициализация при загрузке — показываем только Ереван
+(function() {
+  document.querySelectorAll('.index-table tr[data-city]').forEach(function(row) {
+    if (row.dataset.city !== 'erevan') row.style.display = 'none';
+  });
+})();
+</script>
 
 </div>
 </body>
