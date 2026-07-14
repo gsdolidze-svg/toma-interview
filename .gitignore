@@ -1,0 +1,7 @@
+credentials.md
+credentials.local.md
+.env
+.env.*
+*.key
+*.pem
+.claude/
